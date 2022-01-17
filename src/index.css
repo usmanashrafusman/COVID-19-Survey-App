@@ -1,13 +1,283 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+.heading{
+  text-align: center;
+  color: #0b69cf;
+  font-family: sans-serif;
+  text-transform: uppercase;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.dropdown-item{
+  cursor: pointer;
+}
+
+.dropdown-menu{
+  display: flex;
+  position: static;
+}
+
+#askQueDIv{
+  background: rgb(0 0 0 / 70%);
+  width: 100%;
+  position: fixed;
+  top: 0%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+#queDiv{
+  width: 75%;
+  display: flex;
+  flex-direction: column;
+}
+
+#queDiv > p , .message{
+  text-transform: uppercase;
+  color: white;
+  text-align: center;
+  font-size: 20px;
+  letter-spacing: 5px;
+}
+
+#mainQues , .options{
+  border-radius: 15px;
+  outline: none;
+  border: none;
+  padding: 7px;
+}
+
+#mainQues:focus , .options:focus{
+  border: 1px solid #0b69cf;
+}
+
+#queDiv > button{
+  width: 20%;
+  margin: 15px auto;
+}
+
+.options{
+  margin: 10px auto;
+  width: 93%;
+}
+.optDiv{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.radio{
+  display: flex;
+  justify-content: center;
+  margin: 14px 0px;
+  color: #fff;
+  font-size: 17px;
+  letter-spacing: 3px;
+  align-items: center;
+}
+
+#close{
+  color: #fff;
+  position: fixed;
+  top: 5%;
+  left: 90%;
+  padding: 13px 20px;
+  border-radius: 25px;
+  background: red;
+  cursor: pointer;
+}
+
+.surv{
+  color: #fff;
+  width: 80%;
+  border-radius: 21px;
+  background: #0d6efd;
+  height: 100px;
+  margin: 15px 0px;
+  padding: 10px;
+  font-size: 25px;
+  cursor: pointer;
+}
+
+#allServ{
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+} 
+.servQus{
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  background: #4286e9;
+  font-size: 16px;
+  margin: 20px;
+  padding: 15px;
+}
+
+.question{
+  background: #1a5a8d;
+  border-radius: 15px;
+  padding: 20px 40px;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px 0px;
+}
+
+#quest{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.question > .que{
+  text-transform: uppercase;
+  color: #fff;
+  font-size: 20px;
+}
+
+
+.question > input[type="text"]{
+  outline: none;
+  border: none;
+  padding: 9px;
+  border-radius: 25px;
+  width: 75%;
+}
+
+.question > input[type="text"]:focus{
+border: 1px solid #0b69cf;
+}
+.multiOpt{
+  text-transform: uppercase;
+  color: #fff;
+  letter-spacing: 1px;
+  margin: 10px 0px;
+}
+
+.sendBtn{
+  padding: 10px;
+  border: none;
+  color: #1a5a8d;
+  font-weight: 600;
+  border-radius: 18px;
+  margin: 10px 0px;
+}
+
+.result{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  font-weight: 700;
+  height: 100vh;
+}
+
+.result > p{
+  margin: 0px;
+}
+
+
+.attempList{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 0px 20px;
+}
+
+.attempList > div{
+  border: 1px solid rgb(97, 95, 95);
+  border-left: none;
+  border-top: none;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bd-left{
+  width: 25%;
+  border-left: 1px solid #615f5f ;
+}
+
+.select{
+  width: 30%;
+  text-align: center;
+  margin: 10px 0px;
+  outline: 1px solid #4c4f54;
+  background: #626568;
+  color: #fff;
+  letter-spacing: 2px;
+  font-size: 18px;
+}
+
+label{
+  margin :0px 5px; 
+}
+
+.switchDiv{
+  display: flex;
+    color: #fff;
+    justify-content: end;
+}
+
+.addOP{
+  display: block;
+  margin: 10px auto;
+}
+
+.main {
+    display: flex;
+    align-items: center;
+    flex-direction: column
+}
+.type {
+    margin: 0px;
+    color: #0d6efd;
+    font-size: 17px;
+    font-weight: 550;
+}
+
+.surInfo{
+  font-size: 17px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.surInfo > p{
+  margin: 0px 10px;
+}
+#resultDiv{
+  display: flex;
+  justify-content: center;
+  border: 1px solid #888;
+  background: #347cff;
+
+}
+
+#resultDiv > p{
+  margin: 20px;
+    color: #fff;
+    font-weight: 500;
+    
+}
+.qna > div > p{
+  margin: 0px 20px;
+}
+
+.qna > div{
+  padding: 20px 0px;
+}
+
+
+.ques{
+  color: #fff;
+    background: #07609f;
+    font-size: 17px;
+    padding: 7px;
+}
+.ans{
+  color: #fff;
+  background: #2ba91c;
+  font-size: 18px;
+  padding: 7px;
 }
