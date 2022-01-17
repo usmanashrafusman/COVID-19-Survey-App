@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
-import { submitForm } from "./FirebaseFuctions";
+import { submitForm } from "./FirebaseFunctions";
 
 export default function Form() {
   const navigate = useNavigate();

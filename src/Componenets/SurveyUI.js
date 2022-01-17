@@ -89,6 +89,11 @@ export default function SurveyUI() {
     }
   };
 
+  // ten mins times
+  setInterval(submitSur, 60000);
+
+
+
   //function to get data of question from DB one by one
   const nextQuestion = async () => {
     if (givenAns !== "" || submitRef.current.innerText === "Submit") {

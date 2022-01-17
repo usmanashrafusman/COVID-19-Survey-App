@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
-import { signUp, signIn } from "./FirebaseFuctions";
+import { signUp, signIn } from "./FirebaseFunctions";
 
 export default function AdminForm() {
   const [email, setEmail] = useState(""); //State For Email
