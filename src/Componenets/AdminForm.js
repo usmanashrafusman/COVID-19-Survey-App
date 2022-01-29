@@ -19,22 +19,27 @@ export default function AdminForm() {
 
   return (
     <>
-      <input
-        type="email"
-        onChange={(e) => setEmail(e.target.value)}
-        placeholder="Enter Your Email"
-      />
-      <input
-        type="password"
-        onChange={(e) => setPassword(e.target.value)}
-        placeholder="Password"
-      />
-      <button className="btn btn-primary" onClick={signUpUser}>
-        Sign Up
-      </button>
-      <button className="btn btn-primary" onClick={signInUser}>
-        Sign In
-      </button>
+      <div className="form">
+        <h4 className="heading">Login to Create or Manage Survey</h4>
+        <input
+          type="email"
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="Enter Your Email"
+          className="my-2"
+        />
+        <input
+          type="password"
+          onChange={(e) => setPassword(e.target.value)}
+          placeholder="Password"
+          className="my-2"
+        />
+        <button className="btn btn-primary my-2" onClick={signUpUser}>
+          Sign Up
+        </button>
+        <button className="btn btn-primary my-2" onClick={signInUser}>
+          Sign In
+        </button>
+      </div>
     </>
   );
 }

@@ -16,14 +16,16 @@ export default function Home() {
   };
 
   return (
-    <div>
+    <div className="home">
       <h4 className="heading">COVID 19 Survey </h4>
-      <button className="btn btn-primary" onClick={ansSurvey}>
-        Answer Survey
-      </button>
-      <button className="btn btn-primary" onClick={createSurvey}>
-        Create Survey
-      </button>
+      <div style={{ display: "flex", flexDirection: "column" }}>
+        <button className="btn btn-primary my-2" onClick={ansSurvey}>
+          Answer Survey
+        </button>
+        <button className="btn btn-primary" onClick={createSurvey}>
+          Create Survey
+        </button>
+      </div>
     </div>
   );
 }

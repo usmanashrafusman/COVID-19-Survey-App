@@ -1,0 +1,19 @@
+{
+  "indexes": [
+    {
+      "collectionGroup": "survey",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "createdByUser",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "timestamp",
+          "order": "ASCENDING"
+        }
+      ]
+    }
+  ],
+  "fieldOverrides": []
+}

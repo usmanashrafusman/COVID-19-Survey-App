@@ -2,10 +2,8 @@ import React, { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router";
 import {
   doc,
-  onSnapshot,
   addDoc,
   updateDoc,
-  arrayRemove,
   arrayUnion,
   where,
   getDoc,

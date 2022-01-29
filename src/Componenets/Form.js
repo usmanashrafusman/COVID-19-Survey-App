@@ -14,23 +14,29 @@ export default function Form() {
 
   return (
     <>
-      <input
-        type="text"
-        onChange={(e) => {
-          setUsername(e.target.value);
-        }}
-        placeholder="Enter Your Name"
-      />
-      <input
-        type="text"
-        onChange={(e) => {
-          setEmail(e.target.value);
-        }}
-        placeholder="Enter Your Email"
-      />
-      <button className="btn btn-primary" onClick={submit}>
-        Answere Survey
-      </button>
+    <div className="form">
+    <h4 className="heading">Enter Your Name & Email To Attend Survey</h4>
+      <div className="d-flex" style={{justifyContent:"center", alignItems:"center" , flexDirection:"column"}}>
+        <input
+          type="text"
+          onChange={(e) => {
+            setUsername(e.target.value);
+          }}
+          placeholder="Enter Your Name"
+          className="my-2"
+        />
+        <input
+          type="text"
+          onChange={(e) => {
+            setEmail(e.target.value);
+          }}
+          placeholder="Enter Your Email"  className="my-2"
+        />
+        <button className="btn btn-primary my-2" onClick={submit}>
+          Answere Survey
+        </button>
+      </div>
+    </div>
     </>
   );
 }
