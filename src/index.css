@@ -293,3 +293,17 @@ label {
   flex-direction: column;
   justify-content: center;
 }
+
+.timer{
+  
+background-color: #07609f;
+display: flex;
+justify-content: center;
+align-items: center;
+height: 50px;
+color: #fff;
+}
+#root{
+  display: flex;
+  flex-direction: column;
+}

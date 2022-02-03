@@ -18,6 +18,7 @@ import {
   limit,
   getDocs,
 } from "firebase/firestore";
+import Timer from "./Timer";
 
 export default function SurveyUI() {
   const { docId } = useParams(); //useParam React Router Hook to manage Urls
@@ -30,6 +31,7 @@ export default function SurveyUI() {
   const [questions, setQuestions] = useState([]); // to set userQuestions
   const [resultStatus, setResultStatus] = useState(false); // state to manage result text
   const [result, setResult] = useState(""); // state to manage result text
+  const [count, setCount] = useState(1);
   const submitRef = useRef(null);
   const { username, email } = JSON.parse(localStorage.getItem("user"));
 
@@ -87,14 +89,14 @@ export default function SurveyUI() {
     }
   };
 
-  // ten mins times
-  setInterval(submitSur, 60000);
-
-
+  useEffect(()=>{
+    // ten mins timer
+    setTimeout(submitSur, 600000);
+  },[])
 
   //function to get data of question from DB one by one
   const nextQuestion = async () => {
-    if (givenAns !== "" || submitRef.current.innerText === "Submit") {
+    if (givenAns !== "" || submitRef.current.innerText === "Show Result") {
       if (lastVisible !== undefined) {
         // query to get data from DB
         const next = query(
@@ -175,6 +177,7 @@ export default function SurveyUI() {
           setGivenAns("");
           setComment("");
           setFirstQue(false);
+          setCount(count + 1);
           const attempDoc = doc(db, "survey", docId, "attemps", attempDocID);
           if (rightAns) {
             //now updateing arr on giving ans
@@ -212,6 +215,7 @@ export default function SurveyUI() {
           }
           setGivenAns("");
           setComment("");
+          setCount(count + 1);
         }
       } else {
         submitSur();
@@ -226,90 +230,105 @@ export default function SurveyUI() {
   };
 
   return (
-    <div style={{ display: "flex", justifyContent: "center" }}>
-      {resultStatus ? (
-        <p className="result">{result}</p>
-      ) : (
-        <>
-          {surveyQue !== {} && (
-            <>
-              <div className="question">
-                <p className="que">Question : {surveyQue.question}</p>
+    <>
+      {!resultStatus && <Timer />}
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        {resultStatus ? (
+          <p className="result">{result}</p>
+        ) : (
+          <>
+            {surveyQue !== {} && (
+              <>
+                <div className="question">
+                  {lastVisible ? (
+                    <>
+                      <p className="que">
+                        Question No {count}: {surveyQue.question}
+                      </p>
+                      {surveyQue.type === "Data" && (
+                        <input
+                          type="text"
+                          onChange={handleChange}
+                          value={givenAns}
+                          placeholder="Write Your Answere Here..."
+                        />
+                      )}
+                      {surveyQue.type === "Single" && (
+                        <>
+                          {arr.map((e) => {
+                            return (
+                              <div className="radio" key={surveyQue.id}>
+                                <input
+                                  onChange={handleChange}
+                                  type="radio"
+                                  id="True"
+                                  name={surveyQue.id}
+                                  value="True"
+                                />
+                                <label htmlFor="True">True</label>
+                                <input
+                                  onChange={handleChange}
+                                  type="radio"
+                                  id="False"
+                                  name={surveyQue.id}
+                                  value="False"
+                                />
+                                <label htmlFor="data">False</label>
+                              </div>
+                            );
+                          })}
+                          <input
+                            type="text"
+                            onChange={(e) => setComment(e.target.value)}
+                            value={comment}
+                            placeholder="Enter Your Comment Here ..."
+                          />
+                        </>
+                      )}
 
-                {surveyQue.type === "Data" && (
-                  <input
-                    type="text"
-                    onChange={handleChange}
-                    value={givenAns}
-                    placeholder="Write Your Answere Here..."
-                  />
-                )}
-                {surveyQue.type === "Single" && (
-                  <>
-                    {arr.map((e) => {
-                      return (
-                        <div className="radio" key={surveyQue.id}>
+                      {surveyQue.type === "Multiple" && (
+                        <>
+                          {surveyQue.options.map((e, index) => {
+                            return (
+                              <div
+                                className="multiOpt"
+                                key={surveyQue.id + index}
+                              >
+                                <input
+                                  type="radio"
+                                  name="Multiple"
+                                  onChange={handleChange}
+                                  value={e.option}
+                                />
+                                <label htmlFor="multiple">{e.option}</label>
+                              </div>
+                            );
+                          })}
                           <input
-                            onChange={handleChange}
-                            type="radio"
-                            id="True"
-                            name={surveyQue.id}
-                            value="True"
+                            type="text"
+                            placeholder="Enter Your Comment Here ..."
                           />
-                          <label htmlFor="True">True</label>
-                          <input
-                            onChange={handleChange}
-                            type="radio"
-                            id="False"
-                            name={surveyQue.id}
-                            value="False"
-                          />
-                          <label htmlFor="data">False</label>
-                        </div>
-                      );
-                    })}
-                    <input
-                      type="text"
-                      onChange={(e) => setComment(e.target.value)}
-                      value={comment}
-                      placeholder="Enter Your Comment Here ..."
-                    />
-                  </>
-                )}
-
-                {surveyQue.type === "Multiple" && (
-                  <>
-                    {surveyQue.options.map((e, index) => {
-                      return (
-                        <div className="multiOpt" key={surveyQue.id + index}>
-                          <input
-                            type="radio"
-                            name="Multiple"
-                            onChange={handleChange}
-                            value={e.option}
-                          />
-                          <label htmlFor="multiple">{e.option}</label>
-                        </div>
-                      );
-                    })}
-                    <input
-                      type="text"
-                      placeholder="Enter Your Comment Here ..."
-                    />
-                  </>
-                )}
-                <button
-                  className="sendBtn"
-                  ref={submitRef}
-                  onClick={nextQuestion}
-                >
-                  {lastVisible ? "Next" : "Submit"}
-                </button>
-              </div>
-            </>
-          )}
-        </>
-      )}
-    </div>
+                        </>
+                      )}
+                    </>
+                  ) : (
+                    <p className="que">
+                      No Questions Remaining Click Button Below
+                    </p>
+                  )}
+                  <button
+                    className="sendBtn"
+                    ref={submitRef}
+                    onClick={nextQuestion}
+                  >
+                    {lastVisible ? "Next" : "Show Result"}
+                  </button>
+                </div>
+              </>
+            )}
+          </>
+        )}
+      </div>
+    </>
   );
 }
